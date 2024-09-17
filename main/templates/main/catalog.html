@@ -1,0 +1,102 @@
+{% extends "main/layout.html" %}
+
+{% block title %}{{cat}}{% endblock %}
+
+{% block content %}
+    <div class="cat-title">
+        <div class="cat-title-low">
+            <a href="/">Главная / </a>
+            <span>{{cat}}</span>
+        </div>
+        <div class="cat-title-high">
+            <a href="/">
+                <svg width="15" height="28" viewBox="0 0 15 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 1L1.72591 12.6604C1.32515 13.0411 1.3093 13.6748 1.69052 14.075L14 27" stroke="#454545" stroke-width="2" stroke-linecap="round"/>
+                </svg></a>
+            <span>{{cat}}</span>
+        </div>
+    </div>
+
+    <div class="cat-content">
+        <div class="cat-content-sort">
+            <div class="cat-content-sort-elem">
+                <span class="sort-elem-title">Цена, ₽</span>
+                <div class="sort-price-slide">
+                    <input type="number" placeholder="от 16999 ₽">
+                    <input type="number" placeholder="до 138999 ₽">
+                </div>
+            </div>
+
+            {% if cat == cat %}
+                <div class="cat-content-sort-elem">
+                    <span class="sort-elem-title">Бренд</span>
+                    <input class="checkbox" type="checkbox" value="Apple" id="Apple">
+                    <label for="Apple">Apple</label>
+                    <input class="checkbox" type="checkbox" value="Apple" id="Honor">
+                    <label for="Honor">Honor</label>
+                    <input class="checkbox" type="checkbox" value="Apple" id="Xiaomi">
+                    <label for="Xiaomi">Xiaomi</label>
+                    <input class="checkbox" type="checkbox" value="Apple" id="Acer">
+                    <label for="Acer">Acer</label>
+                </div>
+                <div class="cat-content-sort-elem">
+                    <span class="sort-elem-title">Встроенная память</span>
+                    <input class="checkbox" type="checkbox" value="512gb" id="512gb">
+                    <label for="512gb">512 ГБ</label>
+                    <input class="checkbox" type="checkbox" value="256gb" id="256gb">
+                    <label for="256gb">256 ГБ</label>
+                    <input class="checkbox" type="checkbox" value="128gb" id="128gb">
+                    <label for="128gb">128 ГБ</label>
+                    <input class="checkbox" type="checkbox" value="64gb" id="64gb">
+                    <label for="64gb">64 ГБ</label>
+                </div>
+                <div class="cat-content-sort-elem">
+                    <span class="sort-elem-title">Оперативная память</span>
+                    <input class="checkbox" type="checkbox" value="2gb" id="2gb">
+                    <label for="2gb">2 ГБ</label>
+                    <input class="checkbox" type="checkbox" value="1.5gb" id="1.5gb">
+                    <label for="1.5gb">1.5 ГБ</label>
+                    <input class="checkbox" type="checkbox" value="1gb" id="1gb">
+                    <label for="1gb">1 ГБ</label>
+                </div>
+                <div class="cat-content-sort-elem">
+                    <span class="sort-elem-title">Количество ядер</span>
+                    <input class="checkbox" type="checkbox" value="8yad" id="8yad">
+                    <label for="8yad">8</label>
+                    <input class="checkbox" type="checkbox" value="6yad" id="6yad">
+                    <label for="6yad">6</label>
+                    <input class="checkbox" type="checkbox" value="4yad" id="4yad">
+                    <label for="4yad">4</label>
+                </div>
+            {% endif %}
+            
+        </div>
+
+        <div class="cat-content-products">
+            {% if products %}
+
+            {% for i in products %}
+
+                {% if i.cat == cat %}
+                    {#% if i.brand == 'Apple' %#}
+                    <div class="cat-content-products-el">
+                        <div class="card">
+                            <a class="card-a" href="{% url 'product' i.id %}">
+                                <div class="card-a-img">
+                                    <img src="{{ i.logo.url }}" alt="">
+                                </div>
+                                <span class="card-title">{{ i.title }}</span>
+                                <span class="card-price">{{ i.price }} ₽</span>
+                            </a>
+                            <button class="card-btn">В корзину</button>
+                        </div>
+                    </div>
+                    {#% endif %#}
+                {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

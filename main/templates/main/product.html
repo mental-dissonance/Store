@@ -1,0 +1,88 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/css/style_product.css' %}">
+
+{% block title %}{{product.title}}{% endblock %}
+
+{% block content %}
+
+    <div class="cat-title">
+        <div class="cat-title-low">
+            <a href="/">Главная / </a>
+            <a href="{% url product.cat %}" class="cat-title-low-sp">{{ product.cat }}</a>
+            <span>/ {{ product.title }}</span>
+        </div>
+        <div class="cat-title-high">
+            <a href="{% url product.cat %}">
+                <svg width="15" height="28" viewBox="0 0 15 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 1L1.72591 12.6604C1.32515 13.0411 1.3093 13.6748 1.69052 14.075L14 27" stroke="#454545" stroke-width="2" stroke-linecap="round"/>
+                </svg></a>
+            <span>{{product.title}}</span>
+        </div>
+
+    </div>
+
+    <div class="product-content">
+
+        <div class="product-content-logo">
+            <img src="{{ product.logo.url }}" alt="">
+        </div>
+
+        <div class="product-content-main">
+            <div class="product-content-main-title">
+
+                <div class="product-content-main-title-top">
+                    <span class="product-content-main-title-top-name">{{ product.title }}</span>
+                    <span class="product-content-main-title-top-color">Цвет: {{product.color}}</span>
+                </div>
+
+                <div class="product-content-main-title-price">
+                    <span>{{ product.price }} ₽</span>
+                    <button class="card-btn">Добавить в корзину</button>
+                </div>
+            </div>
+
+            <div class="product-content-main-info">
+                <span class="product-content-main-info-title">Характеристики:</span>
+                <div class="product-content-main-info-text">
+                    <span>Экран: {{product.display}}</span>
+                    <span>Количество ядер: {{product.processor}}</span>
+                    <span>Оперативная память: {{product.ram}}</span>
+                    <span>Встроенная память: {{product.rom}}</span>
+                    <span>Основная камера: {{product.camera}}</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <h1>Акции</h1>
+    <div class="promo">
+        {% if products %}
+
+        {% for i in products %}
+            
+            {% if i.cat == 'Смартфоны' %}
+        
+                <div class="card">
+                    <a class="card-a" href="{% url 'product' i.id %}">
+                        <div class="card-a-img">
+                            <img src="{{ i.logo.url }}" alt="">
+                        </div>
+                        <span class="card-title">{{ i.title }}</span>
+                        <span class="card-price">{{ i.price }} ₽</span>
+                    </a>
+                    <button class="card-btn">В корзину</button>
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

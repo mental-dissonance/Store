@@ -1,0 +1,80 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="banner">
+    <img src="{% static 'main/img/banner.png' %}" alt="">
+</div>
+<h1>Каталог</h1>
+<div class="main-catalog">
+    
+    <a class="main-catalog-elem" href="catalog/phones/">
+        <img src="{% static 'main/img/Catalog/elem1.png' %}" alt="">
+        <span class="main-catalog-elem-span">Смартфоны</span>
+    </a>
+
+    <a class="main-catalog-elem" href="catalog/notes/">
+        <img src="{% static 'main/img/Catalog/elem2.png' %}" alt="">
+        <span class="main-catalog-elem-span">Ноутбуки</span>
+    </a>
+
+    <a class="main-catalog-elem" href="catalog/computers/">
+        <img src="{% static 'main/img/Catalog/elem3.png' %}" alt="">
+        <span class="main-catalog-elem-span">Компьютеры</span>
+    </a>
+
+    <a class="main-catalog-elem" href="catalog/tvs/">
+        <img src="{% static 'main/img/Catalog/elem4.png' %}" alt="">
+        <span class="main-catalog-elem-span">Телевизоры</span>
+    </a>
+
+    <a class="main-catalog-elem" href="catalog/tablets/">
+        <img src="{% static 'main/img/Catalog/elem5.png' %}" alt="">
+        <span class="main-catalog-elem-span">Планшеты</span>
+    </a>
+
+    <a class="main-catalog-elem" href="catalog/columns/">
+        <img src="{% static 'main/img/Catalog/elem6.png' %}" alt="">
+        <span class="main-catalog-elem-span">Колонки</span>
+    </a>
+    
+    <!--
+    {% for i in categories %}
+    
+    <a class="main-catalog-elem" href="">
+        <img src="{{ i.logo }}" alt="">
+        <span class="main-catalog-elem-span">{{ i.title }}</span>
+    </a>
+
+    {% endfor %}
+    -->
+</div>
+<h1>Акции</h1>
+<div class="promo">
+    {% if products %}
+
+    {% for i in products %}
+        
+        {% if i.cat == 'Смартфоны' %}
+    
+            <div class="card">
+                <a class="card-a" href="{% url 'product' i.id %}">
+                    <div class="card-a-img">
+                        <img src="{{ i.logo.url }}" alt="">
+                    </div>
+                    <span class="card-title">{{ i.title }}</span>
+                    <span class="card-price">{{ i.price }} ₽</span>
+                </a>
+                <button class="card-btn">В корзину</button>
+            </div>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% endif %}
+
+</div>
+{% endblock %}
